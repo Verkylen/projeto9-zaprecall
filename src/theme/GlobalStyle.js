@@ -128,6 +128,10 @@ const GlobalStyle = createGlobalStyle`
     * {
     box-sizing: border-box;
     }
+    body {
+        background-color: #fb6b6b;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Recursive:wght@400;700&family=Righteous&display=swap');
 `;
 
 export default GlobalStyle;
