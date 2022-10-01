@@ -2,9 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Start from "./img/Start.svg";
 import Rotate from "./img/Rotate.svg";
-// import Remembered from "./img/Remembered.svg";
-// import Almost from "./img/Almost.svg";
-// import Failed from "./img/Failed.svg";
 
 const cards = [
     {question: 'O que é JSX?', answer: 'Uma extensão de linguagem do JavaScript'},
@@ -21,10 +18,10 @@ export default function Flashcards({openQuestion, setOpenQuestion, openCard, set
     function renderBox(card, i) {
         if (lastClicked !== i) {
             return (
-                <QuestionStyle key={i}>
+                <QuestionStyle key={i} id={i} responses={responses}>
                     <span>Pergunta {i+1}</span>
                     <img onClick={() => changeList(i)}
-                         src={(i in responses) ? responses[i]: Start}
+                         src={(i in responses)? responses[i][1]: Start}
                          alt="Iniciar cartão"/>
                 </QuestionStyle>
             );
@@ -86,13 +83,13 @@ const QuestionStyle = styled.div`
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
-        color: #333333;
+        color: ${props => (props.id in props.responses)? (props.responses)[props.id][0]: '#333333'};
     }
 
     img {
         margin-right: 15px;
         margin-left: auto;
-        cursor: pointer;
+        cursor: ${props => (props.id in props.responses)? 'auto': 'pointer'};
     }
 `
 

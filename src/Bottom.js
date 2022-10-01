@@ -7,9 +7,9 @@ import Failed from "./img/Failed.svg";
 export default function Bottom({offAlternatives, setOffAlternatives, setResponses, setOpenQuestion, setOpenCard, setLastClicked, responses, lastClicked}) {
     let [quantity, setQuantity] = React.useState(0);
 
-    function clickResponse(icon) {
+    function clickResponse(color, icon) {
         const newResponses = {...responses};
-        newResponses[lastClicked] = icon;
+        newResponses[lastClicked] = [color, icon];
         setResponses(newResponses);
         setOffAlternatives(true);
         setQuantity(quantity + 1);
@@ -21,15 +21,15 @@ export default function Bottom({offAlternatives, setOffAlternatives, setResponse
     return (
     <Footer>
         <div>
-            <button onClick={() => clickResponse(Failed)}
+            <button onClick={() => clickResponse('#ff3030', Failed)}
                     disabled={offAlternatives}>
                 Não lembrei
             </button>
-            <button onClick={() => clickResponse(Almost)}
+            <button onClick={() => clickResponse('#ff922e', Almost)}
                     disabled={offAlternatives}>
                 Quase não lembrei
             </button>
-            <button onClick={() => clickResponse(Remembered)}
+            <button onClick={() => clickResponse('#2fbe34', Remembered)}
                     disabled={offAlternatives}>
                 Zap!
             </button>
