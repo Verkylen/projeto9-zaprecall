@@ -1,15 +1,41 @@
+import React from "react";
 import styled from "styled-components";
+import Remembered from "./img/Remembered.svg";
+import Almost from "./img/Almost.svg";
+import Failed from "./img/Failed.svg";
 
-export default function Bottom() {
+export default function Bottom({offAlternatives, setOffAlternatives, setResponses, setOpenQuestion, setOpenCard, setLastClicked, responses, lastClicked}) {
+    let [quantity, setQuantity] = React.useState(0);
+
+    function clickResponse(icon) {
+        const newResponses = {...responses};
+        newResponses[lastClicked] = icon;
+        setResponses(newResponses);
+        setOffAlternatives(true);
+        setQuantity(quantity + 1);
+        setOpenQuestion(false);
+        setOpenCard(false);
+        setLastClicked(null);
+    }
+
     return (
     <Footer>
         <div>
-            <button>Não lembrei</button>
-            <button>Quase não lembrei</button>
-            <button>Zap!</button>
+            <button onClick={() => clickResponse(Failed)}
+                    disabled={offAlternatives}>
+                Não lembrei
+            </button>
+            <button onClick={() => clickResponse(Almost)}
+                    disabled={offAlternatives}>
+                Quase não lembrei
+            </button>
+            <button onClick={() => clickResponse(Remembered)}
+                    disabled={offAlternatives}>
+                Zap!
+            </button>
         </div>
         <div>
-            <span>/8 CONCLUÍDOS</span>
+            <span>{quantity}/8 CONCLUÍDOS</span>
         </div>
     </Footer>
     );
@@ -39,6 +65,7 @@ const Footer = styled.footer`
             border-radius: 5px;
             font-family: 'Recursive', sans-serif;
             color: #ffffff;
+            cursor: pointer;
         }
 
         button:nth-of-type(1) {
