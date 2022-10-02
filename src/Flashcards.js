@@ -83,7 +83,6 @@ const QuestionStyle = styled.div`
         margin-left: 15px;
         font-family: 'Recursive', sans-serif;
         font-weight: 700;
-        font: 1;
         text-decoration: ${props => (props.id in props.responses)? 'line-through': 'none'};
         font-size: 16px;
         line-height: 19px;
