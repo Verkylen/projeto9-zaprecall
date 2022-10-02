@@ -22,20 +22,23 @@ export default function Bottom({offAlternatives, setOffAlternatives, setResponse
     <Footer>
         <div>
             <button onClick={() => clickResponse('#ff3030', Failed)}
-                    disabled={offAlternatives}>
+                    disabled={offAlternatives}
+                    data-identifier="forgot-btn">
                 Não lembrei
             </button>
             <button onClick={() => clickResponse('#ff922e', Almost)}
-                    disabled={offAlternatives}>
+                    disabled={offAlternatives}
+                    data-identifier="almost-forgot-btn">
                 Quase não lembrei
             </button>
             <button onClick={() => clickResponse('#2fbe34', Remembered)}
-                    disabled={offAlternatives}>
+                    disabled={offAlternatives}
+                    data-identifier="zap-btn">
                 Zap!
             </button>
         </div>
         <div>
-            <span>{quantity}/8 CONCLUÍDOS</span>
+            <span data-identifier="flashcard-counter">{quantity}/8 CONCLUÍDOS</span>
         </div>
     </Footer>
     );
@@ -97,4 +100,4 @@ const Footer = styled.footer`
             color: #333333;
         }
     }
-`
+`;

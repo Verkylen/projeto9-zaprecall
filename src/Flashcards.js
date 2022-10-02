@@ -12,34 +12,36 @@ const cards = [
     {question: 'Usamos o npm para __', answer: 'gerenciar os pacotes necessários e suas dependências'},
     {question: 'Usamos props para __', answer: 'passar diferentes informações para componentes'},
     {question: 'Usamos estado (state) para __', answer: 'dizer para o React quais informações quando atualizadas devem renderizar a tela novamente'}
-]
+];
 
 export default function Flashcards({openQuestion, setOpenQuestion, openCard, setOpenCard, setOffAlternatives, responses, lastClicked, setLastClicked}) {
     function renderBox(card, i) {
         if (lastClicked !== i) {
             return (
-                <QuestionStyle key={i} id={i} responses={responses}>
-                    <span>Pergunta {i+1}</span>
+                <QuestionStyle key={i} id={i} responses={responses} data-identifier="flashcard">
+                    <span data-identifier="flashcard-index-item">Pergunta {i+1}</span>
                     <img onClick={() => changeList(i)}
                          src={(i in responses)? responses[i][1]: Start}
-                         alt="Iniciar cartão"/>
+                         alt="Iniciar cartão"
+                         data-identifier="flashcard-show-btn flashcard-status"/>
                 </QuestionStyle>
             );
         }
         else if (!openCard) {
             return (
                 <CardStyle key={i}>
-                    <span>{card.question}</span>
-                    <img onClick={() => {setOpenCard(true); setOffAlternatives(false)}}
+                    <span data-identifier="flashcard-question">{card.question}</span>
+                    <img onClick={() => {setOpenCard(true); setOffAlternatives(false);}}
                          src={Rotate}
-                         alt="Conferir resposta"/>
+                         alt="Conferir resposta"
+                         data-identifier="flashcard-turn-btn"/>
                 </CardStyle>
             );
         }
         else {
             return (
                 <CardStyle key={i}>
-                    <span>{card.answer}</span>
+                    <span data-identifier="flashcard-answer">{card.answer}</span>
                 </CardStyle>
             );
         }
@@ -47,7 +49,7 @@ export default function Flashcards({openQuestion, setOpenQuestion, openCard, set
 
     function changeList(i) {
         if (!openQuestion && !(i in responses)) {
-            setOpenQuestion(!openQuestion);
+            setOpenQuestion(true);
             setLastClicked(i);
         }
     }
@@ -65,7 +67,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-`
+`;
 
 const QuestionStyle = styled.div`
     margin-bottom: 25px;
@@ -92,7 +94,7 @@ const QuestionStyle = styled.div`
         margin-left: auto;
         cursor: ${props => (props.id in props.responses)? 'auto': 'pointer'};
     }
-`
+`;
 
 const CardStyle = styled.div`
     position: relative;
@@ -115,4 +117,4 @@ const CardStyle = styled.div`
         bottom: 6px;
         cursor: pointer;
     }
-`
+`;
